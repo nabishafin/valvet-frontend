@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 
-export default function TeamSection() {
+export default function TeamSection({ bgColor = "bg-white" }) {
   const scrollRef = useRef(null);
 
   const team = [
@@ -44,7 +44,7 @@ export default function TeamSection() {
   };
 
   return (
-    <section className="w-full bg-white py-20 overflow-hidden">
+    <section className={`w-full ${bgColor} py-20 overflow-hidden`}>
       <div className="w-full max-w-[1400px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">

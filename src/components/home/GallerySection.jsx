@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-export default function GallerySection() {
+export default function GallerySection({ bgColor = "bg-[#F4F1EC]" }) {
   return (
-    <section className="w-full bg-[#F4F1EC] py-20 overflow-hidden">
+    <section className={`w-full ${bgColor} py-20 overflow-hidden`}>
       <div className="w-full  ">
         {/* Header */}
         <div className="text-center mb-16">

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function TestimonialSection() {
+export default function TestimonialSection({ bgColor = "bg-[#F4F1EC]" }) {
   return (
-    <section className="w-full bg-[#F4F1EC] py-24">
+    <section className={`w-full ${bgColor} py-24`}>
       <div className="w-full px-6">
         <div className="relative">
 
