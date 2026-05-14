@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="w-full bg-[#1A1A1A] text-white pt-24 pb-12">
-      <div className="w-full max-w-[1400px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           {/* Column 1: Logo & Social */}
           <div className="space-y-8">

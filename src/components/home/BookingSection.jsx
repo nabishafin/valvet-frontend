@@ -3,7 +3,7 @@ import { Phone, Mail, ChevronDown } from "lucide-react";
 export default function BookingSection({ bgColor = "bg-[#F4F1EC]" }) {
   return (
     <section className={`w-full ${bgColor} py-24`}>
-      <div className="w-full max-w-[1400px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Left Side: Text & Info */}
           <div className="w-full lg:w-1/2 space-y-8">
