@@ -43,7 +43,7 @@ export default async function ServiceDetailsPage({ params }) {
 
       {/* Main Content */}
       <section className="bg-white py-20">
-        <div className="w-full max-w-[1400px] mx-auto px-6">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
           <div className="flex flex-col lg:flex-row gap-16">
             
             {/* Left Column: Details */}
@@ -174,7 +174,7 @@ export default async function ServiceDetailsPage({ params }) {
 
       {/* You May Also Like */}
       <section className="bg-white py-24 border-t border-gray-100">
-        <div className="w-full max-w-[1400px] mx-auto px-6">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
           <h2 className="font-playfair text-4xl md:text-5xl text-gray-900 mb-16">
             You may also like
           </h2>

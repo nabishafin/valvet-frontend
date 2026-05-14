@@ -28,7 +28,7 @@ export default function ServicesPage() {
 
       {/* Services Grid Section */}
       <section className="bg-white py-24">
-        <div className="w-full max-w-[1400px] mx-auto px-6">
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
           {/* Header */}
           <div className="text-center mb-20 space-y-4">
             <span className="text-[#650A33] uppercase tracking-[0.2em] text-xs font-bold block">

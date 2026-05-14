@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function GenesisSection() {
   return (
     <section className="w-full bg-white py-24">
-      <div className="w-full max-w-[1400px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Left Content */}

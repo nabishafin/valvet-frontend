@@ -1,7 +1,7 @@
 export default function InfoSection() {
   return (
     <section className="w-full bg-[#F4F1EC] py-16">
-      <div className="container mx-auto px-6 max-w-[1400px]">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-[#660032]/15">
 
           {/* Locations */}

@@ -22,7 +22,7 @@ export default function ExploreStudio() {
 
   return (
     <section className="w-full bg-white py-16 overflow-hidden">
-      <div className="container mx-auto px-6 max-w-[1400px]">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div className="flex flex-col gap-2">

@@ -36,7 +36,7 @@ export default function ValuesSection() {
 
   return (
     <section className="w-full bg-[#F4F1EC] py-24">
-      <div className="container mx-auto px-6 max-w-[1400px]">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <span className="text-[#650A33] uppercase tracking-[0.3em] text-[11px] font-bold block">
