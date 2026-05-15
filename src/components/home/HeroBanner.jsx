@@ -10,7 +10,7 @@ export default function HeroBanner() {
       <div className="absolute inset-0 z-0 bg-black/10" />
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/45 via-black/25 to-transparent" />
 
-      <div className="container relative z-10 mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px] grid md:grid-cols-2 gap-6 items-center h-full pt-20">
+      <div className="w-full relative z-10 mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px] grid md:grid-cols-2 gap-6 items-center h-full pt-20">
         {/* Left Content */}
         <div className="flex flex-col gap-6 text-white ">
           <h1 className="font-playfair text-5xl md:text-7xl leading-tight">
@@ -80,7 +80,7 @@ export default function HeroBanner() {
                 type="button"
                 className="mt-4 w-full rounded-full bg-[#BA8C43] py-3.5 text-[11px] font-bold tracking-widest text-white transition-colors hover:bg-[#a6773a]"
               >
-                CHECK AVAILABILITY
+                Book now
               </button>
             </form>
 

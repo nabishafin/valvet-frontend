@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-[#650A33]">
-      <div className="container mx-auto flex h-24 items-center justify-between px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
+      <div className="w-full mx-auto flex h-24 items-center justify-between px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.svg"

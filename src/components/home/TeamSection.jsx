@@ -2,36 +2,11 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { teamMembers } from "@/data/team";
 
 export default function TeamSection({ bgColor = "bg-white" }) {
   const scrollRef = useRef(null);
-
-  const team = [
-    {
-      name: "Elara Vane",
-      role: "CREATIVE DIRECTOR",
-      description: "Editorial Cuts & Balayage",
-      experience: "12+ Years",
-      rating: 5,
-      image: "/team 1.jpg"
-    },
-    {
-      name: "Julian Ross",
-      role: "SENIOR STYLIST",
-      description: "Men's Grooming & Precision Cuts",
-      experience: "8 Years",
-      rating: 5,
-      image: "/team 2.jpg"
-    },
-    {
-      name: "Sofia Blanc",
-      role: "SKIN SPECIALIST",
-      description: "Advanced Esthetics",
-      experience: "6 Years",
-      rating: 5,
-      image: "/team 3.png"
-    }
-  ];
+  const team = teamMembers;
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -121,13 +96,18 @@ export default function TeamSection({ bgColor = "bg-white" }) {
                       <button className="flex-1 bg-[#BA8C43] text-white py-3 rounded-full font-bold text-sm hover:bg-[#a17a39] transition-colors shadow-sm">
                         Book {member.name.split(' ')[0]}
                       </button>
-                      <button className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100 transition-colors">
+                      <a 
+                        href={member.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100 transition-colors"
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                           <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                         </svg>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
