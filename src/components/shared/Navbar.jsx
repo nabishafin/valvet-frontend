@@ -36,7 +36,7 @@ export default function Navbar() {
             CONTACT US
           </Link>
           <Link
-            href="/book"
+            href="/contact"
             className="ml-2 rounded-full border border-white px-7 py-2.5 transition-all hover:bg-white hover:text-[#650A33]"
           >
             BOOK NOW
@@ -76,7 +76,7 @@ export default function Navbar() {
             CONTACT US
           </Link>
           <Link
-            href="/book"
+            href="/contact"
             onClick={() => setIsOpen(false)}
             className="mt-2 rounded-full border border-white px-8 py-3 transition-all hover:bg-white hover:text-[#650A33]"
           >

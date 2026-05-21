@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 export default function Footer() {
+  const { config } = useSiteConfig();
   return (
     <footer className="w-full bg-[#1A1A1A] text-white pt-24 pb-12">
       <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
@@ -20,13 +25,13 @@ export default function Footer() {
               choosing Aura as their primary business sanctuary.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+              <a href={`tel:${config.contact.phone}`} className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                 <Phone size={18} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+              <a href={`mailto:${config.contact.email}`} className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                 <Mail size={18} />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+              <a href={config.socials.instagram} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
@@ -42,15 +47,17 @@ export default function Footer() {
             <ul className="space-y-6">
               <li className="flex gap-4 items-start text-gray-400">
                 <MapPin size={20} className="mt-1 flex-shrink-0" />
-                <span className="text-sm">998 Devonshire Ave. Camp Hill, PA 17011</span>
+                <a href={config.contact.mapLink} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-white transition-colors">
+                  {config.contact.address}
+                </a>
               </li>
               <li className="flex gap-4 items-start text-gray-400">
                 <Mail size={20} className="mt-1 flex-shrink-0" />
-                <span className="text-sm">info@companyname.com</span>
+                <span className="text-sm">{config.contact.email}</span>
               </li>
               <li className="flex gap-4 items-start text-gray-400">
                 <Phone size={20} className="mt-1 flex-shrink-0" />
-                <span className="text-sm">(808) 555-0111</span>
+                <span className="text-sm">{config.contact.phone}</span>
               </li>
             </ul>
           </div>
@@ -61,15 +68,15 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-400">Mon — Fri</span>
-                <span>09:00 — 20:00</span>
+                <span>{config.openingHours.weekdays}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-400">Saturday</span>
-                <span>10:00 — 18:00</span>
+                <span>{config.openingHours.saturday}</span>
               </div>
               <div className="flex justify-between text-sm text-gray-400">
                 <span>Sunday</span>
-                <span>Closed</span>
+                <span>{config.openingHours.sunday}</span>
               </div>
             </div>
           </div>
@@ -101,9 +108,9 @@ export default function Footer() {
             © 2026 Velvet Rouge. Built for the ambitious beauty professional.
           </p>
           <div className="flex gap-8 text-[10px] tracking-widest text-gray-500 uppercase">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Career</a>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="/career" className="hover:text-white transition-colors">Career</Link>
           </div>
         </div>
       </div>

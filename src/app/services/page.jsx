@@ -1,10 +1,14 @@
+"use client";
+
 import BookingSection from "@/components/home/BookingSection";
 import ServiceCard from "@/components/shared/ServiceCard";
-import { services } from "@/data/services";
+import { useGetStudiosQuery } from "@/redux/features/serviceApi";
 import Image from "next/image";
 
 export default function ServicesPage() {
-  const suites = services;
+  const { data: studiosData, isLoading, isError } = useGetStudiosQuery();
+  const suites = studiosData?.data || [];
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -27,7 +31,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid Section */}
-      <section className="bg-white py-24">
+      <section className="bg-white py-24 min-h-[600px]">
         <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
           {/* Header */}
           <div className="text-center mb-20 space-y-4">
@@ -40,11 +44,25 @@ export default function ServicesPage() {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            {suites.map((suite, idx) => (
-              <ServiceCard key={idx} {...suite} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#BA8C43]"></div>
+            </div>
+          ) : isError ? (
+            <div className="text-center py-20 text-red-500">
+              Failed to load services. Please try again later.
+            </div>
+          ) : suites.length === 0 ? (
+            <div className="text-center py-20 text-gray-500 italic">
+              No studios available at the moment.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+              {suites.map((suite, idx) => (
+                <ServiceCard key={suite._id || idx} {...suite} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

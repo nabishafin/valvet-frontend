@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import ServiceCard from "../shared/ServiceCard";
-import { services } from "@/data/services";
+import { useGetStudiosQuery } from "@/redux/features/serviceApi";
 
 export default function ExploreStudio() {
-  const suites = services;
+  const { data: studiosData, isLoading, isError } = useGetStudiosQuery();
+  const suites = studiosData?.data || [];
 
   const scrollRef = useRef(null);
 
@@ -24,14 +25,20 @@ export default function ExploreStudio() {
     <section className="w-full bg-white py-16 overflow-hidden">
       <div className="w-full mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
-          <div className="flex flex-col gap-2">
-            <span className="text-[#C5A059] uppercase tracking-widest text-sm font-bold mb-2">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div className="max-w-2xl">
+            <span className="text-[#C5A059] uppercase tracking-widest text-sm font-bold mb-2 block">
               EXPLORE YOUR STUDIO.
             </span>
-            <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl text-gray-900 tracking-tight">
-              Explore Your Studio.
+            <h2 className="font-playfair text-5xl md:text-6xl text-gray-900 mb-6 uppercase tracking-tight">
+              Explore <br />
+              <span className="italic font-light">The Studios</span>
             </h2>
+            <p className="text-gray-500 text-lg leading-relaxed font-medium">
+              Discover our collection of meticulously designed private sanctuaries. 
+              Each studio is a bespoke environment tailored to empower your artistry 
+              and provide your clients with an unforgettable luxury experience.
+            </p>
           </div>
           <div className="flex flex-col gap-3 max-w-md">
             <p className="text-[#161616B2] text-sm md:text-base leading-relaxed">
@@ -70,7 +77,7 @@ export default function ExploreStudio() {
             className="flex gap-8 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4"
           >
             {suites.map((suite, idx) => (
-              <div key={idx} className="min-w-[100%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.33rem)] shrink-0 snap-start">
+              <div key={idx} className="min-w-[85%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.33rem)] shrink-0 snap-start">
                 <ServiceCard {...suite} />
               </div>
             ))}

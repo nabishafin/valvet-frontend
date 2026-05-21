@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useSiteConfig } from "@/hooks/useSiteConfig";
 
 export default function GenesisSection() {
+  const { config } = useSiteConfig();
+
   return (
     <section className="w-full bg-white py-24">
       <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 2xl:px-6">
@@ -38,16 +43,16 @@ export default function GenesisSection() {
               <div className="pt-8 border-t border-gray-100 flex items-center gap-4 mt-12">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
                   <Image
-                    src="/team 1.jpg"
-                    alt="Elena Voss"
+                    src={config.founder.image}
+                    alt={config.founder.name}
                     fill
                     className="object-cover"
                   />
                 </div>
                 <div>
-                  <h4 className="font-playfair text-xl font-bold text-gray-900 leading-tight">Elena Voss</h4>
+                  <h4 className="font-playfair text-xl font-bold text-gray-900 leading-tight">{config.founder.name}</h4>
                   <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">
-                    Founder & Creative Director
+                    {config.founder.role}
                   </p>
                 </div>
               </div>

@@ -1,4 +1,10 @@
+"use client";
+
+import { useSiteConfig } from "@/hooks/useSiteConfig";
+
 export default function InfoSection() {
+  const { config } = useSiteConfig();
+
   return (
     <section className="w-full bg-[#F4F1EC] py-16">
       <div className="w-full mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px]">
@@ -12,9 +18,9 @@ export default function InfoSection() {
             </svg>
             <h3 className="text-xl font-semibold text-[#660032] mb-3">Locations</h3>
             <p className="text-sm text-gray-600 mb-4 max-w-xs">
-              4517 Washington Ave. Manchester, Kentucky 39495
+              {config.contact.address}
             </p>
-            <a href="#" className="text-sm font-bold text-black flex items-center gap-1 hover:underline">
+            <a href={config.contact.mapLink} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-black flex items-center gap-1 hover:underline">
               See On Map
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m9 18 6-6-6-6" />
@@ -28,9 +34,9 @@ export default function InfoSection() {
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
             </svg>
             <h3 className="text-xl font-semibold text-[#660032] mb-3">Contact</h3>
-            <p className="text-sm text-gray-600 mb-2">(808) 555-0111</p>
-            <a href="mailto:Info@Companyname.Com" className="text-sm text-gray-600 underline hover:text-[#660032]">
-              Info@Companyname.Com
+            <p className="text-sm text-gray-600 mb-2">{config.contact.phone}</p>
+            <a href={`mailto:${config.contact.email}`} className="text-sm text-gray-600 underline hover:text-[#660032]">
+              {config.contact.email}
             </a>
           </div>
 
@@ -42,9 +48,9 @@ export default function InfoSection() {
             </svg>
             <h3 className="text-xl font-semibold text-[#660032] mb-3">Opening Hours</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Mon To Fri: 9.00am - 8.30pm<br />
-              Sat: 10.00am - 6.30pm<br />
-              Sun: Closed
+              Mon To Fri: {config.openingHours.weekdays}<br />
+              Sat: {config.openingHours.saturday}<br />
+              Sun: {config.openingHours.sunday}
             </p>
           </div>
 
