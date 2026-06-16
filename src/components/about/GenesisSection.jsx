@@ -18,8 +18,7 @@ export default function GenesisSection() {
                   THE GENESIS
                 </span>
                 <h2 className="font-playfair text-5xl md:text-6xl lg:text-[64px] text-gray-900 leading-[1.1] tracking-tight">
-                  Sophisticated Grooming <br />
-                  for <span className="italic">Everyday Confidence</span>
+                  Meet the <span className="italic">Founder</span>
                 </h2>
               </div>
 

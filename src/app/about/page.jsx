@@ -4,7 +4,6 @@ import ValuesSection from "@/components/about/ValuesSection";
 import TeamSection from "@/components/home/TeamSection";
 import BookingSection from "@/components/home/BookingSection";
 import GallerySection from "@/components/home/GallerySection";
-import TestimonialSection from "@/components/home/TestimonialSection";
 
 export default function AboutPage() {
   return (
@@ -14,7 +13,6 @@ export default function AboutPage() {
       <ValuesSection />
       <GallerySection bgColor="bg-white" />
       <TeamSection bgColor="bg-[#F4F1EC]" />
-      <TestimonialSection bgColor="bg-white" />
       <BookingSection />
     </div>
   );

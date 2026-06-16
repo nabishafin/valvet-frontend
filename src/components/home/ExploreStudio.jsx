@@ -86,9 +86,12 @@ export default function ExploreStudio() {
 
         {/* Bottom Button */}
         <div className="flex justify-center mt-16">
-          <button className="bg-[#BA8C43] text-white px-10 py-3.5 rounded-full font-bold text-[13px] tracking-widest transition-colors hover:bg-[#a17a39] shadow-md hover:shadow-lg">
-            Become A Owner
-          </button>
+          <a
+            href="/contact"
+            className="bg-[#BA8C43] text-white px-10 py-3.5 rounded-full font-bold text-[13px] tracking-widest transition-colors hover:bg-[#a17a39] shadow-md hover:shadow-lg"
+          >
+            Become An Owner
+          </a>
         </div>
 
       </div>

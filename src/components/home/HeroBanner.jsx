@@ -2,52 +2,42 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useGetServicesQuery } from "@/redux/features/serviceApi";
 import { useInstantBookingMutation } from "@/redux/features/bookingApi";
 import toast from "react-hot-toast";
 import { useSiteConfig } from "@/hooks/useSiteConfig";
 
+const TIME_SLOTS = [
+  "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM",
+  "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+  "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM",
+  "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM",
+  "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM",
+  "6:00 PM", "6:30 PM", "7:00 PM",
+];
+
 export default function HeroBanner() {
-  const [service, setService] = useState("");
   const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const { config } = useSiteConfig();
 
-  const { data: servicesData, isLoading: servicesLoading } = useGetServicesQuery();
   const [instantBooking, { isLoading: isBooking }] = useInstantBookingMutation();
-
-  const formatTitle = (text) => {
-    if (!text) return "";
-    return text
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleBooking = async (e) => {
     e.preventDefault();
-    if (!service || !date || !name || !email || !phone) {
-      toast.error("Please fill in all fields.");
+    if (!name || !date || !time) {
+      toast.error("Please fill in your name, date, and time.");
       return;
     }
 
     try {
-      const response = await instantBooking({
-        service,
-        date,
-        name,
-        email,
-        phone
-      }).unwrap();
-
+      const response = await instantBooking({ name, email, phone, date, time }).unwrap();
       if (response.success) {
-        toast.success(response.message || "Booking request sent successfully!");
-        setService("");
+        toast.success(response.message || "Booking request sent! Check your email for confirmation.");
         setDate("");
+        setTime("");
         setName("");
         setEmail("");
         setPhone("");
@@ -58,22 +48,21 @@ export default function HeroBanner() {
   };
 
   return (
-    <section className="relative w-full h-[600px] md:h-[800px] flex items-center ">
-      {/* Background Image with Overlay */}
+    <section className="relative w-full h-[600px] md:h-[800px] flex items-center">
+      {/* Background */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/background banner.png')" }}
       />
-      {/* Dark overlay to make it blackish */}
       <div className="absolute inset-0 z-0 bg-black/10" />
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/45 via-black/25 to-transparent" />
 
       <div className="w-full relative z-10 mx-auto px-6 md:px-12 lg:px-16 2xl:px-6 max-w-[1400px] grid md:grid-cols-2 gap-6 items-center h-full pt-20">
         {/* Left Content */}
-        <div className="flex flex-col gap-8 text-white ">
+        <div className="flex flex-col gap-8 text-white">
           <h1 className="font-playfair text-5xl md:text-8xl leading-[1.1] tracking-tight">
-            Elevate your <br />
-            <span className="italic font-light">signature essence</span>
+            Let&apos;s build wealth <br />
+            <span className="italic font-light">one suite at a time</span>
           </h1>
 
           <p className="text-zinc-300 text-sm md:text-lg leading-relaxed max-w-xl font-medium">
@@ -102,7 +91,7 @@ export default function HeroBanner() {
           </div>
         </div>
 
-        {/* Right Content - Booking Card */}
+        {/* Right Content — Booking Card */}
         <div className="hidden lg:flex justify-end">
           <div className="w-auto min-w-[380px] max-w-[600px] rounded-3xl bg-black/30 backdrop-blur-3xl border border-white/10 p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <h2 className="font-playfair text-2xl text-white mb-6 tracking-wide">
@@ -110,24 +99,21 @@ export default function HeroBanner() {
             </h2>
 
             <form onSubmit={handleBooking} className="flex flex-col gap-5">
-              {/* Name and Phone Grid */}
+              {/* Name and Phone */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-                    Full Name
-                  </label>
+                  <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Full Name *</label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your Name"
+                    required
                     className="w-full bg-transparent text-sm text-white border-b border-zinc-700 pb-1.5 outline-none focus:border-[#BA8C43] transition-colors placeholder:text-zinc-600"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-                    Phone Number
-                  </label>
+                  <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Phone Number</label>
                   <input
                     type="tel"
                     value={phone}
@@ -138,11 +124,9 @@ export default function HeroBanner() {
                 </div>
               </div>
 
-              {/* Email Field */}
+              {/* Email */}
               <div className="flex flex-col gap-2">
-                <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-                  Email Address
-                </label>
+                <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Email Address</label>
                 <input
                   type="email"
                   value={email}
@@ -152,60 +136,36 @@ export default function HeroBanner() {
                 />
               </div>
 
-              {/* Studio Selection */}
-              <div className="flex flex-col gap-2 relative">
-                <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-                  I am looking for
-                </label>
-                <div
-                  className="relative border-b border-zinc-700 pb-2 cursor-pointer group"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
-                  <div className="text-sm text-white font-medium flex justify-between items-center pr-2">
-                    {service ? formatTitle(service) : (servicesLoading ? "Loading..." : "Select a Studio")}
-                    <svg
-                      className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''} text-zinc-500 group-hover:text-[#BA8C43]`}
-                      xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+              {/* Date and Time */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Date *</label>
+                  <div className="relative border-b border-zinc-700 pb-2">
+                    <input
+                      type="date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      required
+                      className="w-full bg-transparent text-sm text-white outline-none cursor-pointer [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 font-medium"
+                    />
                   </div>
-
-                  {/* Custom Dropdown Menu */}
-                  {isDropdownOpen && (
-                    <div className="absolute top-full left-0 w-full mt-1 bg-[#1A1A1A] border border-white/10 rounded-xl overflow-hidden z-50 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200">
-                      <div className="max-h-[180px] overflow-y-auto custom-scrollbar py-1">
-                        {servicesData?.data?.map((item) => (
-                          <div
-                            key={item._id}
-                            className="px-5 py-2.5 text-sm text-zinc-300 hover:bg-[#BA8C43] hover:text-white transition-colors cursor-pointer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setService(item.title);
-                              setIsDropdownOpen(false);
-                            }}
-                          >
-                            {formatTitle(item.title)}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
-              </div>
-
-              {/* Date Selection */}
-              <div className="flex flex-col gap-2">
-                <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">
-                  On the date
-                </label>
-                <div className="relative border-b border-zinc-700 pb-2">
-                  <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full bg-transparent text-sm text-white outline-none cursor-pointer [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-50 font-medium"
-                  />
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold">Time *</label>
+                  <div className="relative border-b border-zinc-700 pb-2">
+                    <select
+                      value={time}
+                      onChange={(e) => setTime(e.target.value)}
+                      required
+                      className="w-full bg-transparent text-sm text-white outline-none cursor-pointer appearance-none"
+                    >
+                      <option value="" className="bg-[#1A1A1A]">Select time</option>
+                      {TIME_SLOTS.map((slot) => (
+                        <option key={slot} value={slot} className="bg-[#1A1A1A]">{slot}</option>
+                      ))}
+                    </select>
+                    <svg className="absolute right-0 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6"/></svg>
+                  </div>
                 </div>
               </div>
 
