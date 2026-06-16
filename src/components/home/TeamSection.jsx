@@ -99,7 +99,7 @@ export default function TeamSection({ bgColor = "bg-white" }) {
                 >
                   <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
                     {/* Image */}
-                    <div className="w-full aspect-square rounded-lg overflow-hidden mb-6 bg-gray-50 relative">
+                    <div className="w-full rounded-lg overflow-hidden mb-6 bg-gray-50" style={{ position: "relative", height: "300px" }}>
                       <Image
                         src={member.image}
                         alt={member.name}
