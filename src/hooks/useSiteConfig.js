@@ -44,7 +44,13 @@ export function useSiteConfig() {
           whatsapp: formatSocialUrl(data.data.socials?.whatsapp ?? staticConfig.socials.whatsapp, 'whatsapp'),
         },
         openingHours: { ...staticConfig.openingHours, ...data.data.openingHours },
-        founder: { ...staticConfig.founder, ...data.data.founder },
+        founder: {
+          ...staticConfig.founder,
+          ...data.data.founder,
+          bio: data.data.founder?.bio?.length ? data.data.founder.bio : staticConfig.founder.bio,
+          quote: data.data.founder?.quote || staticConfig.founder.quote,
+          backgroundImage: data.data.founder?.backgroundImage || staticConfig.founder.backgroundImage,
+        },
       }
     : staticConfig;
 
