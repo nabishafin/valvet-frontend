@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { useGetStudioBySlugQuery, useGetStudiosQuery } from "@/redux/features/serviceApi";
 import { useInstantBookingMutation } from "@/redux/features/bookingApi";
 import toast from "react-hot-toast";
+import PageHero from "@/components/shared/PageHero";
 
 const TIME_SLOTS = [
   "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM",
@@ -86,22 +87,16 @@ export default function ServiceDetailsPage({ params }) {
 
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-[#1E1E1E]">
-        <div className="absolute inset-0 opacity-20">
-          <Image src="/Vector.png" alt="Vector Pattern" fill className="object-cover" />
-        </div>
-        <div className="relative z-10 text-center px-6">
-          <h1 className="font-playfair text-4xl md:text-5xl text-white tracking-widest uppercase mb-4">
-            SERVICES
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest">
-            <Link href="/" className="text-white hover:text-[#BA8C43] transition-colors uppercase">HOME</Link>
-            <span className="text-gray-500">/</span>
-            <span className="text-[#BA8C43] uppercase">SERVICE DETAILS</span>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title={studio.title}
+        subtitle="STUDIO DETAILS"
+        bgImage={studio.image || "/exprore -2.png"}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: studio.title },
+        ]}
+      />
 
       {/* Main Content */}
       <section className="bg-white py-20">

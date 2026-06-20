@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import BookingSection from "@/components/home/BookingSection";
+import PageHero from "@/components/shared/PageHero";
 
 export const metadata = {
   title: "Why We Are Different | Velvet Rouge Salon Suites",
@@ -49,24 +49,17 @@ const differences = [
 export default function WhyWeAreDifferentPage() {
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-[#1E1E1E]">
-        <div className="absolute inset-0 opacity-20">
-          <Image src="/Vector.png" alt="Vector Pattern" fill className="object-cover" />
-        </div>
-        <div className="relative z-10 text-center px-6">
-          <h1 className="font-playfair text-4xl md:text-6xl text-white tracking-widest uppercase mb-4">
-            WHY WE ARE DIFFERENT
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest">
-            <Link href="/" className="text-white hover:text-[#BA8C43] transition-colors uppercase">HOME</Link>
-            <span className="text-gray-500">/</span>
-            <Link href="/about" className="text-white hover:text-[#BA8C43] transition-colors uppercase">ABOUT</Link>
-            <span className="text-gray-500">/</span>
-            <span className="text-[#BA8C43] uppercase">WHY WE ARE DIFFERENT</span>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Why We Are Different"
+        subtitle="THE VELVET DIFFERENCE"
+        bgImage="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=80&auto=format&fit=crop"
+        position="center center"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "About", href: "/about" },
+          { label: "Why We Are Different" },
+        ]}
+      />
 
       {/* Content */}
       <section className="bg-white py-24">

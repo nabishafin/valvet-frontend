@@ -1,23 +1,16 @@
-import Image from "next/image";
+import PageHero from "@/components/shared/PageHero";
 
 export default function ContactHero() {
   return (
-    <section className="relative h-[300px] md:h-[400px] flex items-center justify-center overflow-hidden bg-[#1E1E1E]">
-      {/* Vector Background */}
-      <div className="absolute inset-0 opacity-20">
-        <Image
-          src="/Vector.png"
-          alt="Vector Pattern"
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      <div className="relative z-10 text-center px-6">
-        <h1 className="font-playfair text-5xl md:text-7xl text-white">
-          Contact us
-        </h1>
-      </div>
-    </section>
+    <PageHero
+      title="Contact Us"
+      subtitle="GET IN TOUCH"
+      bgImage="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1920&q=80&auto=format&fit=crop"
+      position="center center"
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Contact" },
+      ]}
+    />
   );
 }

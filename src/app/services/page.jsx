@@ -3,7 +3,7 @@
 import BookingSection from "@/components/home/BookingSection";
 import ServiceCard from "@/components/shared/ServiceCard";
 import { useGetStudiosQuery } from "@/redux/features/serviceApi";
-import Image from "next/image";
+import PageHero from "@/components/shared/PageHero";
 
 export default function ServicesPage() {
   const { data: studiosData, isLoading, isError } = useGetStudiosQuery();
@@ -11,24 +11,16 @@ export default function ServicesPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-[#1E1E1E]">
-        {/* Vector Background */}
-        <div className="absolute inset-0 opacity-20">
-          <Image
-            src="/Vector.png"
-            alt="Vector Pattern"
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        <div className="relative z-10 text-center px-6">
-          <h1 className="font-playfair text-5xl md:text-7xl text-white tracking-widest uppercase">
-            SERVICES
-          </h1>
-        </div>
-      </section>
+      <PageHero
+        title="Services"
+        subtitle="EXPLORE YOUR STUDIO"
+        bgImage="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920&q=80&auto=format&fit=crop"
+        position="center top"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Services" },
+        ]}
+      />
 
       {/* Services Grid Section */}
       <section className="bg-white py-24 min-h-[600px]">

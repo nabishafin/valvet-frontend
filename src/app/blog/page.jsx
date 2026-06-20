@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useGetBlogsQuery } from "@/redux/features/blogApi";
+import PageHero from "@/components/shared/PageHero";
 
 function formatDate(dateString) {
   if (!dateString) return "";
@@ -151,27 +152,16 @@ export default function BlogPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden bg-[#1E1E1E]">
-        <div className="absolute inset-0 opacity-20">
-          <Image src="/Vector.png" alt="Vector Pattern" fill className="object-cover" />
-        </div>
-        <div className="relative z-10 text-center px-6">
-          <span className="text-[#BA8C43] text-xs font-bold uppercase tracking-[0.3em] mb-4 block">
-            INSIGHTS & INSPIRATION
-          </span>
-          <h1 className="font-playfair text-5xl md:text-7xl text-white tracking-tight mb-4">
-            The Blog
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest">
-            <Link href="/" className="text-white hover:text-[#BA8C43] transition-colors uppercase">
-              HOME
-            </Link>
-            <span className="text-gray-500">/</span>
-            <span className="text-[#BA8C43] uppercase">BLOG</span>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="The Blog"
+        subtitle="INSIGHTS & INSPIRATION"
+        bgImage="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&q=80&auto=format&fit=crop"
+        position="center center"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Blog" },
+        ]}
+      />
 
       {/* Search + Filter Bar */}
       <section className="bg-[#F4F1EC] py-8 border-b border-gray-200/50">

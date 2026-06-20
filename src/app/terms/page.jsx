@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import PageHero from "@/components/shared/PageHero";
 
 export const metadata = {
   title: "Terms of Service | Velvet",
@@ -9,27 +9,14 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-[300px] flex items-center justify-center overflow-hidden bg-[#1E1E1E]">
-        <div className="absolute inset-0 opacity-20">
-          <Image
-            src="/Vector.png"
-            alt="Vector Pattern"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="relative z-10 text-center px-6">
-          <h1 className="font-playfair text-4xl md:text-5xl text-white tracking-widest uppercase mb-4">
-            TERMS OF SERVICE
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest">
-            <Link href="/" className="text-white hover:text-[#BA8C43] transition-colors uppercase">HOME</Link>
-            <span className="text-gray-500">/</span>
-            <span className="text-[#BA8C43] uppercase">TERMS</span>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Terms of Service"
+        bgImage="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1920&q=80&auto=format&fit=crop"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Terms" },
+        ]}
+      />
 
       {/* Content Section */}
       <section className="bg-white py-20 px-6">
