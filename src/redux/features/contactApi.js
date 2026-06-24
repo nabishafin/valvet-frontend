@@ -8,6 +8,7 @@ export const contactApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Inquiry"],
     }),
   }),
 });

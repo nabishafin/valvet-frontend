@@ -21,8 +21,8 @@ export default function ContactForm() {
       toast.error("Please fill in Name, Email, and Message.");
       return;
     }
-    if (message.length < 10) {
-      toast.error("Message must be at least 10 characters.");
+    if (message.length < 1) {
+      toast.error("Please enter a message.");
       return;
     }
 
@@ -161,7 +161,7 @@ export default function ContactForm() {
 
         <div className="pt-4">
           <textarea
-            placeholder="Message (min. 10 characters) *"
+            placeholder="Message *"
             rows={1}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
