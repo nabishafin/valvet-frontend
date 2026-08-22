@@ -52,10 +52,29 @@ export function useSiteConfig() {
     return null;
   };
 
+  // Format external clickable map link for <a> tags (Must NEVER be an embed URL)
+  const extractClickableMapLink = (input, embedUrl, fallbackAddress) => {
+    if (typeof input === "string" && input.trim() && !input.includes("<iframe") && !input.includes("/maps/embed") && !input.includes("output=embed")) {
+      if (input.startsWith("http://") || input.startsWith("https://")) {
+        return input;
+      }
+    }
+    // If embedUrl has lat/lng coordinates (!3d lat and !2d lng), construct direct google maps pin link
+    if (embedUrl && typeof embedUrl === "string") {
+      const latMatch = embedUrl.match(/!3d([-?\d.]+)/);
+      const lngMatch = embedUrl.match(/!2d([-?\d.]+)/);
+      if (latMatch && lngMatch) {
+        return `https://www.google.com/maps?q=${latMatch[1]},${lngMatch[1]}`;
+      }
+    }
+    const addressQuery = fallbackAddress || staticConfig.contact.address;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressQuery)}`;
+  };
+
   const rawMap = data?.data?.contact?.googleMap || data?.data?.contact?.googleMapsLink || data?.data?.contact?.mapLink;
   const currentAddress = data?.data?.contact?.address || staticConfig.contact.address;
   const mapEmbedUrl = extractMapEmbedUrl(rawMap, currentAddress) || extractMapEmbedUrl(staticConfig.contact.mapLink, staticConfig.contact.address);
-  const resolvedMapLink = (typeof rawMap === "string" && !rawMap.includes("<iframe")) ? rawMap : (mapEmbedUrl || staticConfig.contact.mapLink);
+  const clickableMapLink = extractClickableMapLink(rawMap, mapEmbedUrl, currentAddress);
 
   // If we have backend data, merge it with the static fallback so that
   // any field the backend doesn't return still has a sensible value.
@@ -66,9 +85,9 @@ export function useSiteConfig() {
           ...staticConfig.contact, 
           ...data.data.contact,
           mapEmbedUrl,
-          mapLink: resolvedMapLink,
+          mapLink: clickableMapLink,
           googleMap: data.data.contact?.googleMap || mapEmbedUrl,
-          googleMapsLink: data.data.contact?.googleMapsLink || resolvedMapLink,
+          googleMapsLink: clickableMapLink,
         },
         socials: { 
           instagram: formatSocialUrl(data.data.socials?.instagram ?? staticConfig.socials.instagram, 'instagram'),
