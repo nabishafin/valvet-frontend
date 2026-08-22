@@ -55,7 +55,7 @@ export function useSiteConfig() {
   const rawMap = data?.data?.contact?.googleMap || data?.data?.contact?.googleMapsLink || data?.data?.contact?.mapLink;
   const currentAddress = data?.data?.contact?.address || staticConfig.contact.address;
   const mapEmbedUrl = extractMapEmbedUrl(rawMap, currentAddress) || extractMapEmbedUrl(staticConfig.contact.mapLink, staticConfig.contact.address);
-  const resolvedMapLink = (typeof rawMap === "string" && !rawMap.includes("<iframe")) ? rawMap : staticConfig.contact.mapLink;
+  const resolvedMapLink = (typeof rawMap === "string" && !rawMap.includes("<iframe")) ? rawMap : (mapEmbedUrl || staticConfig.contact.mapLink);
 
   // If we have backend data, merge it with the static fallback so that
   // any field the backend doesn't return still has a sensible value.
