@@ -31,12 +31,45 @@ export function useSiteConfig() {
     }
   };
 
+  // Extract valid map embed URL (supports iframe tag, embed link, or fallback address)
+  const extractMapEmbedUrl = (input, fallbackAddress) => {
+    if (!input && !fallbackAddress) return null;
+    if (typeof input === "string" && input.includes("<iframe")) {
+      const srcMatch = input.match(/src=["']([^"']+)["']/);
+      if (srcMatch && srcMatch[1]) return srcMatch[1];
+    }
+    if (typeof input === "string" && (input.includes("/maps/embed") || input.includes("output=embed"))) {
+      return input;
+    }
+    const query = (typeof input === "string" && input.trim()) ? input : fallbackAddress;
+    if (query) {
+      let cleanQuery = query;
+      if (cleanQuery.includes("?q=")) {
+        cleanQuery = cleanQuery.split("?q=")[1].split("&")[0];
+      }
+      return `https://maps.google.com/maps?q=${encodeURIComponent(cleanQuery)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+    }
+    return null;
+  };
+
+  const rawMap = data?.data?.contact?.googleMap || data?.data?.contact?.googleMapsLink || data?.data?.contact?.mapLink;
+  const currentAddress = data?.data?.contact?.address || staticConfig.contact.address;
+  const mapEmbedUrl = extractMapEmbedUrl(rawMap, currentAddress) || extractMapEmbedUrl(staticConfig.contact.mapLink, staticConfig.contact.address);
+  const resolvedMapLink = (typeof rawMap === "string" && !rawMap.includes("<iframe")) ? rawMap : staticConfig.contact.mapLink;
+
   // If we have backend data, merge it with the static fallback so that
   // any field the backend doesn't return still has a sensible value.
   const config = data?.data
     ? {
         name: data.data.name ?? staticConfig.name,
-        contact: { ...staticConfig.contact, ...data.data.contact },
+        contact: { 
+          ...staticConfig.contact, 
+          ...data.data.contact,
+          mapEmbedUrl,
+          mapLink: resolvedMapLink,
+          googleMap: data.data.contact?.googleMap || mapEmbedUrl,
+          googleMapsLink: data.data.contact?.googleMapsLink || resolvedMapLink,
+        },
         socials: { 
           instagram: formatSocialUrl(data.data.socials?.instagram ?? staticConfig.socials.instagram, 'instagram'),
           facebook: formatSocialUrl(data.data.socials?.facebook ?? staticConfig.socials.facebook, 'facebook'),
@@ -52,7 +85,13 @@ export function useSiteConfig() {
           backgroundImage: data.data.founder?.backgroundImage || staticConfig.founder.backgroundImage,
         },
       }
-    : staticConfig;
+    : {
+        ...staticConfig,
+        contact: {
+          ...staticConfig.contact,
+          mapEmbedUrl,
+        },
+      };
 
   return { config, isLoading, isError };
 }

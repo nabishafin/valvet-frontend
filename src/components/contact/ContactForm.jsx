@@ -125,6 +125,23 @@ export default function ContactForm() {
           )}
         </div>
 
+        {/* Google Map Embed */}
+        {config.contact?.mapEmbedUrl && (
+          <div className="w-full my-12 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50">
+            <iframe
+              src={config.contact.mapEmbedUrl}
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[350px] md:h-[450px] rounded-2xl"
+              title="Google Map Location"
+            />
+          </div>
+        )}
+
         <h3 className="font-playfair text-2xl md:text-3xl text-[#1E1E1E] mb-2">
           Leave us a message!
         </h3>
