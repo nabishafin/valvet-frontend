@@ -95,7 +95,7 @@ export default function TeamSection({ bgColor = "bg-white" }) {
               team.map((member, idx) => (
                 <div
                   key={idx}
-                  className="min-w-[85%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.33rem)] shrink-0 snap-start"
+                  className="w-[85%] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-[85%] md:max-w-[calc(50%-1rem)] lg:max-w-[calc(33.333%-1.33rem)] shrink-0 snap-start"
                 >
                   <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col">
                     {/* Image */}

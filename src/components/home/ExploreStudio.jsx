@@ -77,7 +77,7 @@ export default function ExploreStudio() {
             className="flex gap-8 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4"
           >
             {suites.map((suite, idx) => (
-              <div key={idx} className="min-w-[85%] md:min-w-[calc(50%-1rem)] lg:min-w-[calc(33.333%-1.33rem)] shrink-0 snap-start">
+              <div key={idx} className="w-[85%] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-[85%] md:max-w-[calc(50%-1rem)] lg:max-w-[calc(33.333%-1.33rem)] shrink-0 snap-start">
                 <ServiceCard {...suite} />
               </div>
             ))}
